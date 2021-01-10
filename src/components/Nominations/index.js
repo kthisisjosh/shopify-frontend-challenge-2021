@@ -1,21 +1,31 @@
 import React from "react"
 import Paper from "@material-ui/core/Paper"
-import { Button, Grid, Typography } from "@material-ui/core"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
+import IconButton from "@material-ui/core/IconButton"
+import RemoveIcon from '@material-ui/icons/Remove';
 
 const Nominations = ({ removeNomination, nominations }) => {
 
     return (
-      <Paper style={{backgroundColor: "#f4f6f8", border: "solid 1px #17171740", width: "30%", padding: "1rem 2rem"}}>
+      <Paper style={{backgroundColor: "#f4f6f8", padding: "1rem 2rem", marginBottom: "2.5vh"}}>
         <Grid container direction="column">
             <Grid item>
                 <Typography variant="h5">Nominations</Typography>
             </Grid>
             <Grid container>
                 {nominations.map((nomination) => (
-                    <Grid item style={{marginBottom: "1vh", width: "100%"}}>
-                        <Typography onClick={() => removeNomination(nomination.imdbID)} variant="body">
-                            {nomination.Title} ({nomination.Year})
-                        </Typography>
+                    <Grid container style={{marginBottom: "1vh", width: "100%"}}>
+                        <Grid item style={{display: "flex", alignItems: "center", marginRight: 5}}>
+                            <IconButton onClick={() => removeNomination(nomination.imdbID)} aria-label="delete">
+                                <RemoveIcon fontSize="small"/>
+                            </IconButton>
+                        </Grid>
+                        <Grid item style={{marginTop: 5}}>
+                            <Typography variant="body">
+                              {nomination.Title} ({nomination.Year})
+                            </Typography>
+                        </Grid>
                     </Grid>
                 ))}
             </Grid>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { getMoviesBySearch } from './api';
 import Search from './components/Search';
+import Info from './components/Info';
 import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +12,8 @@ const App = () => {
     const [nominations, setNominations] = useState([{ Title: 'test' }]);
     const [movies, setMovies] = useState([]);
     const [searchTerms, setSearchTerms] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (nominations.length === 5) {
@@ -31,16 +33,18 @@ const App = () => {
     }, [searchTerms]);
 
     const loadMovies = () => {
-        setLoading(true);
         if (searchTerms != '') {
-            getMoviesBySearch(searchTerms).then((data) => {
-                if (data.Error) {
-                    console.log(data);
-                } else {
-                    setMovies(data.Search);
-                    setLoading(false);
-                }
-            });
+          setLoading(true);
+          getMoviesBySearch(searchTerms).then((data) => {
+              if (data.Error) {
+                setError(data.Error)
+                setMovies([])
+              } else {
+                setError(null)
+                setMovies(data.Search);
+              }
+              setLoading(false);
+          });
         }
     };
 
@@ -97,25 +101,29 @@ const App = () => {
                 <Typography variant="h4" style={{color: "#FFFFFF"}}>The Shoppies 2021</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body" style={{color: "#FFFFFF"}}>Search for your favourite movies and nominate your personal top 5 movies!</Typography>
+                <Typography variant="body1" style={{color: "#FFFFFF"}}>Search for your favourite movies and nominate your personal top 5 movies!</Typography>
               </Grid>
             </Grid>
-            <Grid container direction="row" style={{ marginBottom: '2.5vh' }}>
+            <Grid container direction="row">
+              <Grid container direction="column" style={{ width: "60%", marginBottom: '2.5vh' }}>
                 <Search setSearchTerms={setSearchTerms} />
-                <Nominations
-                    removeNomination={removeNomination}
-                    nominations={nominations}
-                />
-            </Grid>
-            <Grid item>
                 <SearchResults
-                    isAlreadyNominated={isAlreadyNominated}
-                    onNominate={onNominate}
-                    setSearchTerms={setSearchTerms}
-                    searchTerms={searchTerms}
-                    loading={loading}
-                    movies={movies}
+                      isAlreadyNominated={isAlreadyNominated}
+                      onNominate={onNominate}
+                      setSearchTerms={setSearchTerms}
+                      searchTerms={searchTerms}
+                      loading={loading}
+                      error={error}
+                      movies={movies}
+                  />
+              </Grid>
+              <Grid container direction="column" style={{width: "40%"}}>
+                <Nominations
+                  removeNomination={removeNomination}
+                  nominations={nominations}
                 />
+                <Info loading={loading} selectedMovie={{title: "Avatar"}} />
+              </Grid>
             </Grid>
         </Grid>
     );
