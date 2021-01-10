@@ -6,12 +6,14 @@ import Info from './components/Info';
 import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
 import TitleText from './components/TitleText';
+import { Banner } from 'material-ui-banner';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import useStyles from './style';
 import './style.css';
 
 const App = () => {
-    const [nominations, setNominations] = useState([{ Title: 'test' }]);
+    const [nominations, setNominations] = useState([]);
+    const [bannerOpen, setBannerOpen] = useState(false);
     const [movies, setMovies] = useState([]);
     const [searchTerms, setSearchTerms] = useState('');
     const [error, setError] = useState(null);
@@ -28,7 +30,9 @@ const App = () => {
 
     useEffect(() => {
         if (nominations.length === 5) {
-            alert("You've reached your maximum nominations!");
+            setBannerOpen(true);
+        } else {
+            setBannerOpen(false);
         }
     }, [nominations]);
 
@@ -108,6 +112,13 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <Grid container direction="column" className={classes.container}>
                 <TitleText />
+                <Banner
+                    paperProps={{ style: { width: '60%' } }}
+                    appBar
+                    label="You've reached your maximum nominations!"
+                    showDismissButton={false}
+                    open={bannerOpen}
+                />
                 <Grid container direction="row">
                     <Grid
                         container
