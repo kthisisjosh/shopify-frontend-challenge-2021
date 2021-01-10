@@ -10,4 +10,5 @@ export default makeStyles(() => ({
     resultButtonContainer: { marginRight: '10px' },
     button: { backgroundColor: '#008060', color: '#FFFFFF' },
     icon: { width: 15, height: 15 },
+    titleText: { cursor: 'pointer' },
 }));

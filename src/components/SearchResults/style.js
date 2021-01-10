@@ -8,4 +8,5 @@ export default makeStyles(() => ({
         marginRight: '2rem',
         padding: '1rem 2rem',
     },
+    captionContainer: { marginTop: -5 },
 }));

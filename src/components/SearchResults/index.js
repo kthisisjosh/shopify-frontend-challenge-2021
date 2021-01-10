@@ -25,21 +25,27 @@ const SearchResults = ({
                         Search Results{' '}
                         {searchTerms !== '' && `for "${searchTerms}"`}
                     </Typography>
+                    <Grid item className={classes.captionContainer}>
+                        <Typography variant="caption">
+                            Click on a movie title to see more information about
+                            it.
+                        </Typography>
+                    </Grid>
                     {movies.length == 0 && !error && (
                         <Typography variant="caption">Search!</Typography>
                     )}
                     {error && error !== 'Too many results.' && (
-                        <Typography variant="caption">{error}</Typography>
+                        <Typography color="error" variant="h6">
+                            {error}
+                        </Typography>
                     )}
-                    <Typography variant="caption">
-                        Click on a movie title to see more information about it.
-                    </Typography>
                 </Grid>
                 {loading ? (
                     <ClipLoader color="#008060" loading={loading} size={25} />
                 ) : (
                     movies.map((movie) => (
                         <Result
+                            key={movie.imdbID}
                             loadSelectedMovie={loadSelectedMovie}
                             isAlreadyNominated={isAlreadyNominated}
                             onNominate={onNominate}

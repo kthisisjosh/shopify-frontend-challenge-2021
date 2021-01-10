@@ -14,4 +14,5 @@ export default makeStyles(() => ({
         marginRight: 5,
     },
     nominationTitleContainer: { marginTop: 2.5 },
+    titleText: { cursor: 'pointer' },
 }));

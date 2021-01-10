@@ -63,7 +63,7 @@ const Info = ({ selectedMovie, loading }) => {
 
                         <Grid item className={classes.plotContainer}>
                             <Typography
-                                variant="caption"
+                                variant="body2"
                                 className={classes.plotText}
                             >
                                 {Plot}

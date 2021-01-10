@@ -5,7 +5,7 @@ import Search from './components/Search';
 import Info from './components/Info';
 import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
-import Typography from '@material-ui/core/Typography';
+import TitleText from './components/TitleText';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import useStyles from './style';
 import './style.css';
@@ -107,26 +107,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <Grid container direction="column" className={classes.container}>
-                <Grid
-                    container
-                    direction="column"
-                    className={classes.introTextContainer}
-                >
-                    <Grid item>
-                        <Typography variant="h4" className={classes.titleText}>
-                            The Shoppies 2021
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography
-                            variant="body1"
-                            className={classes.titleText}
-                        >
-                            Search for your favourite movies and nominate your
-                            personal top 5 movies!
-                        </Typography>
-                    </Grid>
-                </Grid>
+                <TitleText />
                 <Grid container direction="row">
                     <Grid
                         container

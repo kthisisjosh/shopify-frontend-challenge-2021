@@ -15,8 +15,8 @@ const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
                     <Typography variant="h5">Nominations</Typography>
                 </Grid>
                 <Grid container>
-                    {nominations.map((nomination) => (
-                        <Grid container className={classes.nominationContainer}>
+                    {nominations.map((nomination, index) => (
+                        <Grid key={index} container className={classes.nominationContainer}>
                             <Grid
                                 item
                                 className={classes.nominationButtonContainer}
@@ -38,7 +38,8 @@ const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
                                     onClick={() =>
                                         loadSelectedMovie(nomination.imdbID)
                                     }
-                                    variant="body"
+                                    variant="body2"
+                                    className={classes.titleText}
                                 >
                                     {nomination.Title} ({nomination.Year})
                                 </Typography>

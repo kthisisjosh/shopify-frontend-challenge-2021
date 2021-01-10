@@ -29,7 +29,8 @@ const Result = ({
             <Grid item>
                 <Typography
                     onClick={() => loadSelectedMovie(imdbID)}
-                    variant="body"
+                    variant="body2"
+                    className={classes.titleText}
                 >
                     {Title} ({Year})
                 </Typography>
