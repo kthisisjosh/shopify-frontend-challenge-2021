@@ -7,24 +7,21 @@ import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import "./style.css"
+import './style.css';
 
 const App = () => {
     const [nominations, setNominations] = useState([{ Title: 'test' }]);
     const [movies, setMovies] = useState([]);
     const [searchTerms, setSearchTerms] = useState('');
-    const [error, setError] = useState(null)
-    const [selectedMovie, setSelectedMovie] = useState(null)
-    const [loadingSelectedMovie, setLoadingSelectedMovie] = useState(false)
+    const [error, setError] = useState(null);
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [loadingSelectedMovie, setLoadingSelectedMovie] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const theme = createMuiTheme({
-      typography: {
-        fontFamily: [
-          'Poppins',
-          'sans-serif',
-        ].join(','),
-      },
+        typography: {
+            fontFamily: ['Poppins', 'sans-serif'].join(','),
+        },
     });
 
     useEffect(() => {
@@ -32,13 +29,13 @@ const App = () => {
             alert("You've reached your maximum nominations!");
         }
     }, [nominations]);
-    
+
     useEffect(() => {
-      const savedNominations = getSavedNominations();
-      if (savedNominations) {
-          setNominations(JSON.parse(savedNominations));
-      }
-    }, [])
+        const savedNominations = getSavedNominations();
+        if (savedNominations) {
+            setNominations(JSON.parse(savedNominations));
+        }
+    }, []);
 
     useEffect(() => {
         loadMovies();
@@ -46,27 +43,27 @@ const App = () => {
 
     const loadMovies = () => {
         if (searchTerms != '') {
-          setLoading(true);
-          getMoviesBySearch(searchTerms).then((data) => {
-              if (data.Error) {
-                setError(data.Error)
-                setMovies([])
-              } else {
-                setError(null)
-                setMovies(data.Search);
-              }
-              setLoading(false);
-          });
+            setLoading(true);
+            getMoviesBySearch(searchTerms).then((data) => {
+                if (data.Error) {
+                    setError(data.Error);
+                    setMovies([]);
+                } else {
+                    setError(null);
+                    setMovies(data.Search);
+                }
+                setLoading(false);
+            });
         }
     };
 
     const loadSelectedMovie = (imdbID) => {
-      setLoadingSelectedMovie(true)
-      getMovieById(imdbID).then((data) => {
-        setSelectedMovie(data)
-        setLoadingSelectedMovie(false)
-      })
-    }
+        setLoadingSelectedMovie(true);
+        getMovieById(imdbID).then((data) => {
+            setSelectedMovie(data);
+            setLoadingSelectedMovie(false);
+        });
+    };
 
     const onNominate = (Title, Year, imdbID) => {
         let newNominations = [...nominations];
@@ -98,7 +95,7 @@ const App = () => {
     };
 
     const isAlreadyNominated = (imdbID) => {
-      return nominations.some((nomination) => nomination.imdbID === imdbID);
+        return nominations.some((nomination) => nomination.imdbID === imdbID);
     };
 
     window.addEventListener('beforeunload', () => {
@@ -107,48 +104,77 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-          <Grid
-            container
-            direction="column"
-            style={{
-                width: '70%',
-                margin: 'auto',
-                padding: '2rem 1rem',
-                maxWidth: '1080px',
-            }}
-        >
-            <Grid container direction="column" style={{marginBottom: "5vh"}}>
-              <Grid item>
-                <Typography variant="h4" style={{color: "#FFFFFF"}}>The Shoppies 2021</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="body1" style={{color: "#FFFFFF"}}>Search for your favourite movies and nominate your personal top 5 movies!</Typography>
-              </Grid>
+            <Grid
+                container
+                direction="column"
+                style={{
+                    width: '70%',
+                    margin: 'auto',
+                    padding: '2rem 1rem',
+                    maxWidth: '1080px',
+                }}
+            >
+                <Grid
+                    container
+                    direction="column"
+                    style={{ marginBottom: '5vh' }}
+                >
+                    <Grid item>
+                        <Typography variant="h4" style={{ color: '#FFFFFF' }}>
+                            The Shoppies 2021
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography
+                            variant="body1"
+                            style={{ color: '#FFFFFF' }}
+                        >
+                            Search for your favourite movies and nominate your
+                            personal top 5 movies!
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Grid container direction="row">
+                    <Grid
+                        container
+                        direction="column"
+                        style={{
+                            minWidth: '560px',
+                            width: '30vw',
+                            marginBottom: '2.5vh',
+                        }}
+                    >
+                        <Search setSearchTerms={setSearchTerms} />
+                        <SearchResults
+                            isAlreadyNominated={isAlreadyNominated}
+                            onNominate={onNominate}
+                            setSearchTerms={setSearchTerms}
+                            searchTerms={searchTerms}
+                            loading={loading}
+                            error={error}
+                            loadSelectedMovie={loadSelectedMovie}
+                            movies={movies}
+                        />
+                    </Grid>
+                    <Grid
+                        container
+                        direction="column"
+                        style={{ width: '20vw' }}
+                    >
+                        <Nominations
+                            removeNomination={removeNomination}
+                            nominations={nominations}
+                            loadSelectedMovie={loadSelectedMovie}
+                        />
+                        {selectedMovie && (
+                            <Info
+                                loading={loadingSelectedMovie}
+                                selectedMovie={selectedMovie}
+                            />
+                        )}
+                    </Grid>
+                </Grid>
             </Grid>
-            <Grid container direction="row">
-              <Grid container direction="column" style={{ minWidth: "560px", width: "30vw", marginBottom: '2.5vh' }}>
-                <Search setSearchTerms={setSearchTerms} />
-                <SearchResults
-                      isAlreadyNominated={isAlreadyNominated}
-                      onNominate={onNominate}
-                      setSearchTerms={setSearchTerms}
-                      searchTerms={searchTerms}
-                      loading={loading}
-                      error={error}
-                      loadSelectedMovie={loadSelectedMovie}
-                      movies={movies}
-                  />
-              </Grid>
-              <Grid container direction="column" style={{width: "20vw"}}>
-                <Nominations
-                  removeNomination={removeNomination}
-                  nominations={nominations}
-                  loadSelectedMovie={loadSelectedMovie}
-                />
-                {selectedMovie && <Info loading={loadingSelectedMovie} selectedMovie={selectedMovie} />}
-              </Grid>
-            </Grid>
-        </Grid>
         </ThemeProvider>
     );
 };

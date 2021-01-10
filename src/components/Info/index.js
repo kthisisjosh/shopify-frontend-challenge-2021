@@ -3,8 +3,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ClipLoader from 'react-spinners/ClipLoader';
+import makeStyles from './styles';
 
 const Info = ({ selectedMovie, loading }) => {
+    const classes = makeStyles();
     const {
         Title,
         Year,
@@ -15,15 +17,8 @@ const Info = ({ selectedMovie, loading }) => {
         Poster,
         Awards,
     } = selectedMovie;
-    console.log(selectedMovie);
     return (
-        <Paper
-            style={{
-                backgroundColor: '#f4f6f8',
-                overflow: 'auto',
-                padding: '1rem 2rem',
-            }}
-        >
+        <Paper className={classes.container}>
             <Grid container direction="column">
                 <Grid item>
                     <Typography variant="h5">
@@ -34,12 +29,16 @@ const Info = ({ selectedMovie, loading }) => {
                     <ClipLoader color="#008060" loading={loading} size={25} />
                 ) : (
                     <Grid container>
-                        <Grid item >
+                        <Grid item>
                             {Poster !== 'N/A' && (
-                                <img src={Poster} style={{ width: 250 }} />
+                                <img src={Poster} className={classes.poster} />
                             )}
                         </Grid>
-                        <Grid container direction="column" style={{lineHeight: 0.05}}>
+                        <Grid
+                            container
+                            direction="column"
+                            className={classes.infoContainer}
+                        >
                             <Grid item>
                                 <Typography variant="caption">
                                     Released in {Released}
@@ -61,11 +60,11 @@ const Info = ({ selectedMovie, loading }) => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        
-                        <Grid item style={{marginTop: "1vh"}}>
+
+                        <Grid item className={classes.plotContainer}>
                             <Typography
-                                style={{ lineHeight: '1rem' }}
                                 variant="caption"
+                                className={classes.plotText}
                             >
                                 {Plot}
                             </Typography>
