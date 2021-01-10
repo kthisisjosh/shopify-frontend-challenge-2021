@@ -13,6 +13,6 @@ export default makeStyles(() => ({
         alignItems: 'center',
         marginRight: 5,
     },
-    nominationTitleContainer: { marginTop: 2.5 },
+    nominationTitleContainer: { marginTop: 10 },
     titleText: { cursor: 'pointer' },
 }));

@@ -16,7 +16,11 @@ const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
                 </Grid>
                 <Grid container>
                     {nominations.map((nomination, index) => (
-                        <Grid key={index} container className={classes.nominationContainer}>
+                        <Grid
+                            key={index}
+                            container
+                            className={classes.nominationContainer}
+                        >
                             <Grid
                                 item
                                 className={classes.nominationButtonContainer}
