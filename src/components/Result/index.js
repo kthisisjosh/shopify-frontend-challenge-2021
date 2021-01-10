@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import useStyles from './style';
 
 const Result = ({
     isAlreadyNominated,
@@ -12,28 +13,17 @@ const Result = ({
     imdbID,
     loadSelectedMovie,
 }) => {
+    const classes = useStyles();
     return (
-        <Grid
-            container
-            direction="row"
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '5px',
-                marginTop: '5px',
-            }}
-        >
-            <Grid item style={{ marginRight: '10px' }}>
+        <Grid container direction="row" className={classes.container}>
+            <Grid item className={classes.resultButtonContainer}>
                 <IconButton
                     aria-label="Nominate"
-                    style={{ backgroundColor: '#008060', color: '#FFFFFF' }}
                     disabled={isAlreadyNominated(imdbID)}
                     onClick={() => onNominate(Title, Year, imdbID)}
+                    className={classes.button}
                 >
-                    <AddIcon
-                        fontSize="small"
-                        style={{ width: 15, height: 15 }}
-                    />
+                    <AddIcon fontSize="small" className={classes.icon} />
                 </IconButton>
             </Grid>
             <Grid item>

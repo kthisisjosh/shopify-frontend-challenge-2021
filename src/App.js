@@ -7,6 +7,7 @@ import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import useStyles from './style';
 import './style.css';
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [loadingSelectedMovie, setLoadingSelectedMovie] = useState(false);
     const [loading, setLoading] = useState(false);
+    const classes = useStyles();
 
     const theme = createMuiTheme({
         typography: {
@@ -104,30 +106,21 @@ const App = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid
-                container
-                direction="column"
-                style={{
-                    width: '70%',
-                    margin: 'auto',
-                    padding: '2rem 1rem',
-                    maxWidth: '1080px',
-                }}
-            >
+            <Grid container direction="column" className={classes.container}>
                 <Grid
                     container
                     direction="column"
-                    style={{ marginBottom: '5vh' }}
+                    className={classes.introTextContainer}
                 >
                     <Grid item>
-                        <Typography variant="h4" style={{ color: '#FFFFFF' }}>
+                        <Typography variant="h4" className={classes.titleText}>
                             The Shoppies 2021
                         </Typography>
                     </Grid>
                     <Grid item>
                         <Typography
                             variant="body1"
-                            style={{ color: '#FFFFFF' }}
+                            className={classes.titleText}
                         >
                             Search for your favourite movies and nominate your
                             personal top 5 movies!
@@ -138,11 +131,7 @@ const App = () => {
                     <Grid
                         container
                         direction="column"
-                        style={{
-                            minWidth: '560px',
-                            width: '30vw',
-                            marginBottom: '2.5vh',
-                        }}
+                        className={classes.searchContainer}
                     >
                         <Search setSearchTerms={setSearchTerms} />
                         <SearchResults
@@ -159,7 +148,7 @@ const App = () => {
                     <Grid
                         container
                         direction="column"
-                        style={{ width: '20vw' }}
+                        className={classes.nominationContainer}
                     >
                         <Nominations
                             removeNomination={removeNomination}

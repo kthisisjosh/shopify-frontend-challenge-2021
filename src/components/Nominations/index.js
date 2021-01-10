@@ -4,34 +4,22 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
+import useStyles from './style';
 
 const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
+    const classes = useStyles();
     return (
-        <Paper
-            style={{
-                backgroundColor: '#f4f6f8',
-                padding: '1rem 2rem',
-                minWidth: '300px',
-                marginBottom: '2.5vh',
-            }}
-        >
+        <Paper className={classes.container}>
             <Grid container direction="column">
                 <Grid item>
                     <Typography variant="h5">Nominations</Typography>
                 </Grid>
                 <Grid container>
                     {nominations.map((nomination) => (
-                        <Grid
-                            container
-                            style={{ marginBottom: '1vh', width: '100%' }}
-                        >
+                        <Grid container className={classes.nominationContainer}>
                             <Grid
                                 item
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    marginRight: 5,
-                                }}
+                                className={classes.nominationButtonContainer}
                             >
                                 <IconButton
                                     onClick={() =>
@@ -42,7 +30,10 @@ const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
                                     <RemoveIcon fontSize="small" />
                                 </IconButton>
                             </Grid>
-                            <Grid item style={{ marginTop: 2.5 }}>
+                            <Grid
+                                item
+                                className={classes.nominationTitleContainer}
+                            >
                                 <Typography
                                     onClick={() =>
                                         loadSelectedMovie(nomination.imdbID)

@@ -3,21 +3,15 @@ import SearchField from 'react-search-field';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import useStyles from './style';
 
-const Search = ({ setSearchTerms, onSearch }) => {
+const Search = ({ setSearchTerms }) => {
+    const classes = useStyles();
+
     return (
-        <Paper
-            style={{
-                backgroundColor: '#f4f6f8',
-                minWidth: '480px',
-                height: '100px',
-                marginRight: '2rem',
-                padding: '1rem 2rem',
-                marginBottom: '2.5vh',
-            }}
-        >
+        <Paper className={classes.container}>
             <Grid container direction="column">
-                <Grid item style={{ marginBottom: '10px' }}>
+                <Grid item className={classes.titleContainer}>
                     <Typography variant="h5">Movie title</Typography>
                 </Grid>
                 <SearchField
