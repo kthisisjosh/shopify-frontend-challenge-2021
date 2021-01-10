@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import ClipLoader from "react-spinners/ClipLoader"
 import Result from "../Result";
 
-const SearchResults = ({ isAlreadyNominated, onNominate, movies, searchTerms, error, loading }) => {
+const SearchResults = ({ isAlreadyNominated, onNominate, movies, searchTerms, error, loading, loadSelectedMovie }) => {
     return (
       <Paper style={{backgroundColor: "#f4f6f8", minWidth: "480px", width: "50%", marginRight: "2rem", padding: "1rem 2rem"}}>
         <Grid container direction="column">

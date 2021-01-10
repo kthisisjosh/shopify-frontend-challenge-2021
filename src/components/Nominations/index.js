@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
 import RemoveIcon from '@material-ui/icons/Remove';
 
-const Nominations = ({ removeNomination, nominations }) => {
+const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
 
     return (
       <Paper style={{backgroundColor: "#f4f6f8", padding: "1rem 2rem", marginBottom: "2.5vh"}}>
@@ -22,7 +22,7 @@ const Nominations = ({ removeNomination, nominations }) => {
                             </IconButton>
                         </Grid>
                         <Grid item style={{marginTop: 5}}>
-                            <Typography variant="body">
+                            <Typography onClick={() => loadSelectedMovie(nomination.imdbID)} variant="body">
                               {nomination.Title} ({nomination.Year})
                             </Typography>
                         </Grid>

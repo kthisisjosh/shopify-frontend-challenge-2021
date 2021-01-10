@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { getMoviesBySearch } from './api';
+import { getMoviesBySearch, getMovieById } from './api';
 import Search from './components/Search';
 import Info from './components/Info';
 import Nominations from './components/Nominations';
@@ -13,6 +13,8 @@ const App = () => {
     const [movies, setMovies] = useState([]);
     const [searchTerms, setSearchTerms] = useState('');
     const [error, setError] = useState(null)
+    const [selectedMovie, setSelectedMovie] = useState(null)
+    const [loadingSelectedMovie, setLoadingSelectedMovie] = useState(false)
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -47,6 +49,14 @@ const App = () => {
           });
         }
     };
+
+    const loadSelectedMovie = (imdbID) => {
+      setLoadingSelectedMovie(true)
+      getMovieById(imdbID).then((data) => {
+        setSelectedMovie(data)
+        setLoadingSelectedMovie(false)
+      })
+    }
 
     const onNominate = (Title, Year, imdbID) => {
         let newNominations = [...nominations];
@@ -114,6 +124,7 @@ const App = () => {
                       searchTerms={searchTerms}
                       loading={loading}
                       error={error}
+                      loadSelectedMovie={loadSelectedMovie}
                       movies={movies}
                   />
               </Grid>
@@ -121,8 +132,9 @@ const App = () => {
                 <Nominations
                   removeNomination={removeNomination}
                   nominations={nominations}
+                  loadSelectedMovie={loadSelectedMovie}
                 />
-                <Info loading={loading} selectedMovie={{title: "Avatar"}} />
+                {selectedMovie && <Info loading={loadingSelectedMovie} selectedMovie={selectedMovie} />}
               </Grid>
             </Grid>
         </Grid>
