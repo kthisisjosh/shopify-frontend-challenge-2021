@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography"
 import IconButton from "@material-ui/core/IconButton"
 import AddIcon from '@material-ui/icons/Add';
 
-const Result = ({ isAlreadyNominated, onNominate, Title, Year, imdbID }) => {
+const Result = ({ isAlreadyNominated, onNominate, Title, Year, imdbID, loadSelectedMovie }) => {
 
     return (
         <Grid container direction="row" style={{display: "flex", alignItems: "center", marginBottom: "5px", marginTop: "5px"}}>
@@ -14,7 +14,7 @@ const Result = ({ isAlreadyNominated, onNominate, Title, Year, imdbID }) => {
                 </IconButton>
             </Grid>
             <Grid item>
-                <Typography variant="body">{Title} ({Year})</Typography>
+                <Typography onClick={() => loadSelectedMovie(imdbID)} variant="body">{Title} ({Year})</Typography>
             </Grid>
         </Grid>
     );

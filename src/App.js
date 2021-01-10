@@ -6,6 +6,7 @@ import Info from './components/Info';
 import Nominations from './components/Nominations';
 import SearchResults from './components/SearchResults';
 import Typography from '@material-ui/core/Typography';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import "./style.css"
 
 const App = () => {
@@ -16,6 +17,15 @@ const App = () => {
     const [selectedMovie, setSelectedMovie] = useState(null)
     const [loadingSelectedMovie, setLoadingSelectedMovie] = useState(false)
     const [loading, setLoading] = useState(false);
+
+    const theme = createMuiTheme({
+      typography: {
+        fontFamily: [
+          'Poppins',
+          'sans-serif',
+        ].join(','),
+      },
+    });
 
     useEffect(() => {
         if (nominations.length === 5) {
@@ -96,7 +106,8 @@ const App = () => {
     });
 
     return (
-        <Grid
+        <ThemeProvider theme={theme}>
+          <Grid
             container
             direction="column"
             style={{
@@ -115,7 +126,7 @@ const App = () => {
               </Grid>
             </Grid>
             <Grid container direction="row">
-              <Grid container direction="column" style={{ width: "60%", marginBottom: '2.5vh' }}>
+              <Grid container direction="column" style={{ minWidth: "560px", width: "30vw", marginBottom: '2.5vh' }}>
                 <Search setSearchTerms={setSearchTerms} />
                 <SearchResults
                       isAlreadyNominated={isAlreadyNominated}
@@ -128,7 +139,7 @@ const App = () => {
                       movies={movies}
                   />
               </Grid>
-              <Grid container direction="column" style={{width: "40%"}}>
+              <Grid container direction="column" style={{width: "20vw"}}>
                 <Nominations
                   removeNomination={removeNomination}
                   nominations={nominations}
@@ -138,6 +149,7 @@ const App = () => {
               </Grid>
             </Grid>
         </Grid>
+        </ThemeProvider>
     );
 };
 

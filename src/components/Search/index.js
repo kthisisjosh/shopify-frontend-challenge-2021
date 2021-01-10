@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography"
 const Search = ({ setSearchTerms, onSearch }) => {
 
     return (
-      <Paper style={{backgroundColor: "#f4f6f8", minWidth: "480px", width: "50%", height:"100px", marginRight: "2rem", padding: "1rem 2rem", marginBottom: "2.5vh"}}>
+      <Paper style={{backgroundColor: "#f4f6f8", minWidth: "480px", height:"100px", marginRight: "2rem", padding: "1rem 2rem", marginBottom: "2.5vh"}}>
         <Grid container direction="column">
             <Grid item style={{marginBottom: "10px"}}>
                 <Typography variant="h5">Movie title</Typography>

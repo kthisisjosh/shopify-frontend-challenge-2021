@@ -8,7 +8,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
 
     return (
-      <Paper style={{backgroundColor: "#f4f6f8", padding: "1rem 2rem", marginBottom: "2.5vh"}}>
+      <Paper style={{backgroundColor: "#f4f6f8", padding: "1rem 2rem", minWidth: "300px", marginBottom: "2.5vh"}}>
         <Grid container direction="column">
             <Grid item>
                 <Typography variant="h5">Nominations</Typography>
@@ -21,7 +21,7 @@ const Nominations = ({ removeNomination, nominations, loadSelectedMovie }) => {
                                 <RemoveIcon fontSize="small"/>
                             </IconButton>
                         </Grid>
-                        <Grid item style={{marginTop: 5}}>
+                        <Grid item style={{marginTop: 2.5}}>
                             <Typography onClick={() => loadSelectedMovie(nomination.imdbID)} variant="body">
                               {nomination.Title} ({nomination.Year})
                             </Typography>
