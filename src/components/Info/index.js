@@ -30,8 +30,12 @@ const Info = ({ selectedMovie, loading }) => {
                 ) : (
                     <Grid container>
                         <Grid item>
-                            {Poster !== 'N/A' && (
-                                <img src={Poster} className={classes.poster} />
+                            {Poster != 'N/A' && (
+                                <img
+                                    src={Poster}
+                                    alt={`Poster for ${Title}`}
+                                    className={classes.poster}
+                                />
                             )}
                         </Grid>
                         <Grid

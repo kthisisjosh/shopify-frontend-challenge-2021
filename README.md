@@ -6,6 +6,7 @@ Made with React.js
 </p>
 
 ## Features
+
 - Nominate a maximum of 5 movies.
 - View information about each movie before you nominate them.
 - Search results update each keystroke.
@@ -49,4 +50,5 @@ $ npm start
 ```
 
 ## Support ⭐
+
 If you like the project, please star the repo.
