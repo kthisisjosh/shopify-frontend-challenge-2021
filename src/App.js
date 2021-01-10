@@ -18,14 +18,17 @@ const App = () => {
             alert("You've reached your maximum nominations!");
         }
     }, [nominations]);
+    
+    useEffect(() => {
+      const savedNominations = getSavedNominations();
+      if (savedNominations) {
+          setNominations(JSON.parse(savedNominations));
+      }
+    }, [])
 
     useEffect(() => {
-        const savedNominations = getSavedNominations();
-        if (savedNominations) {
-            setNominations(JSON.parse(savedNominations));
-        }
         loadMovies();
-    }, []);
+    }, [searchTerms]);
 
     const loadMovies = () => {
         setLoading(true);
@@ -89,11 +92,16 @@ const App = () => {
                 maxWidth: '1080px',
             }}
         >
-            <Grid item>
-                <Typography style={{color: "#FFFFFF"}}>The Shoppies 2021</Typography>
+            <Grid container direction="column" style={{marginBottom: "5vh"}}>
+              <Grid item>
+                <Typography variant="h4" style={{color: "#FFFFFF"}}>The Shoppies 2021</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body" style={{color: "#FFFFFF"}}>Search for your favourite movies and nominate your personal top 5 movies!</Typography>
+              </Grid>
             </Grid>
             <Grid container direction="row" style={{ marginBottom: '2.5vh' }}>
-                <Search setSearchTerms={setSearchTerms} onSearch={loadMovies} />
+                <Search setSearchTerms={setSearchTerms} />
                 <Nominations
                     removeNomination={removeNomination}
                     nominations={nominations}

@@ -2,6 +2,11 @@ html {
     background-color: #222831;
 }
 
+body {
+    font-weight: 400;
+    line-height: 2rem;
+}
+
 .react-search-field-input {
     padding: 0 !important;
     padding-left: 5px !important;
