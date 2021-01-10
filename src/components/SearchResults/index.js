@@ -1,6 +1,7 @@
 import React from "react"
 import Paper from "@material-ui/core/Paper"
-import { Grid, Typography } from "@material-ui/core"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
 import Result from "../Result";
 
 const SearchResults = ({ isAlreadyNominated, onNominate, movies, searchTerms, loading }) => {
