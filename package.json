@@ -1,5 +1,6 @@
 {
-  "name": "app",
+  "name": "shopify-frontend-challenge-2021-joshuabautista",
+  "author": "Joshua Bautista <joshbautista.com>",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
